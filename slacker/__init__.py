@@ -42,7 +42,7 @@ class Response(object):
         self.raw = body
         self.body = json.loads(body)
         self.successful = self.body['ok']
-        self.error = self.body.get('error')
+        self.error = '{}: {}'.format(self.body.get('error'), json.dumps({k: v for k,v in self.body.items() if k not in ('ok', 'error')}))
 
     def __str__(self):
         return json.dumps(self.body)
